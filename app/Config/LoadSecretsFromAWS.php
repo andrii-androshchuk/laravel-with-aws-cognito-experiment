@@ -44,9 +44,12 @@ final readonly class LoadSecretsFromAWS
 
         $secrets = $this->getListOfSecrets($client, $prefix);
 
-        $values = $this->getSecretValues($client, $secrets);
+        if (empty($secrets) === false) {
 
-        $this->setEnvironmentVariables($values, $prefix);
+            $values = $this->getSecretValues($client, $secrets);
+
+            $this->setEnvironmentVariables($values, $prefix);
+        }
     }
 
     /**
